@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Menu from "./Menu";
+import Video from "./Video";
+import "./App.css";
 
-function App() {
+const videos = {
+  deer: "https://s3.amazonaws.com/codecademy-content/courses/React/react_video-fast.mp4",
+  snail:
+    "https://s3.amazonaws.com/codecademy-content/courses/React/react_video-slow.mp4",
+  cat: "https://s3.amazonaws.com/codecademy-content/courses/React/react_video-cute.mp4",
+  spider:
+    "https://s3.amazonaws.com/codecademy-content/courses/React/react_video-eek.mp4",
+};
+const videoNames = Object.keys(videos);
+const App = () => {
+  const [video, selectVideo] = useState(videos.deer);
+  function onSelectVideo(video) {
+    selectVideo(videos[video]);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h6>Project6:Video Player</h6>
+      <Menu videos={videoNames} onSelectVideo={onSelectVideo} />
+      <Video video={video} />
     </div>
   );
-}
+};
 
 export default App;
